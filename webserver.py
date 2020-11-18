@@ -118,14 +118,26 @@ while True:
         header = "HTTP/1.1 404 Not found\r\n"
         headerBytes = bytes(header, "UTF-8")
         connectionSocket.send(headerBytes)
+        countad = countad + 1
         sumad = sumad + 1
-        countad=countad+1
-        #message = connectionSocket.recv(1024)
+        print("here", "here")
+        print(countad)
 
-        ws.cell(row=countad, column=4).value = str(message)
-        ws.cell(row=countad, column=3).value = str(sumad)
-        ws.cell(row=countad, column=2).value = str(now)
-        ws.cell(row=countad, column=1).value = str(now.year)+str(now.month)+str(now.day)+str(now.hour)+str(now.minute)+str(now.second)+str("stranger")+str(countad)
+        if compsec != int(now.second):
+
+            ws.cell(row=sumad, column=4).value = str(message)
+            ws.cell(row=sumad, column=3).value = str(sumad)
+            ws.cell(row=sumad, column=2).value = str(now)
+            ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
+                now.minute) + str(now.second) + str("host") + str(countad)
+            countad = 0
+            compsec = now.second
+        else:
+            ws.cell(row=sumad, column=4).value = str(message)
+            ws.cell(row=sumad, column=3).value = str(sumad)
+            ws.cell(row=sumad, column=2).value = str(now)
+            ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
+                now.minute) + str(now.second) + str("host") + str(countad)
 
         # 엑셀 파일 저장
         wb.save("test.xlsx")
