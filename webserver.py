@@ -6,6 +6,15 @@ import numpy as np
 import openpyxl
 import datetime
 from datetime import time
+from tkinter import Tk
+
+import sys
+
+from PyQt5.QtWidgets import QApplication, QWidget
+from tkinter import messagebox as msg
+
+
+
 
 wb = openpyxl.load_workbook('test.xlsx')
 
@@ -15,28 +24,6 @@ ws = wb.active
 
 for r in ws.rows:
     row_index = r[0].row  # 행 인덱스
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 from socket import *
 
@@ -51,21 +38,27 @@ countad=0
 sumad=0
 compsec = 61
 
-fig = plt.figure()  # figure(도표) 생성
 
-ax = plt.subplot(211, xlim=(0, 50), ylim=(0, 1024))
+class MyApp(QWidget):
 
-max_points = 50
+    def __init__(self):
+        super().__init__()
+        self.initUI()
 
-line, = ax.plot(np.arange(max_points),
-                np.ones(max_points, dtype=np.float) * np.nan, lw=1, c='blue', ms=1)
-
-
+    def initUI(self):
+        self.setWindowTitle('My First Application')
+        self.move(300, 300)
+        self.resize(400, 200)
+        self.show()
 
 
 while True:
+
+
     connectionSocket, address = serverSocket.accept()
     now = datetime.datetime.now()
+
+
 
     try:
         message = connectionSocket.recv(1024)   # buf size 1024
@@ -82,8 +75,8 @@ while True:
         headerBytes = bytes(header, "UTF-8")
         connectionSocket.send(headerBytes)
         # when buf size is 1 can't parse html code
-        for i in range(0, len(outputData), 8192):   # send buf size 1024
-            connectionSocket.send(outputData[i:i + 8192])
+        for i in range(0, len(outputData), 1024):   # send buf size 1024
+            connectionSocket.send(outputData[i:i + 1024])
         connectionSocket.send(b"\r\n\r\n")
         countad = countad + 1
         sumad=sumad+1
@@ -118,7 +111,10 @@ while True:
         wb.close()
 
 
+
+
         connectionSocket.close()
+
 
     except IOError:
         # 404 Not Found
@@ -156,8 +152,14 @@ while True:
         wb.save("test.xlsx")
         wb.close()
 
-
         connectionSocket.close()
+
+
+
+
+
+
+
 
 
 
