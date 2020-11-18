@@ -87,7 +87,7 @@ while True:
         connectionSocket.send(b"\r\n\r\n")
         countad = countad + 1
         sumad=sumad+1
-        print("here", "here")
+        print("host", "here")
         print(countad)
 
 
@@ -120,7 +120,7 @@ while True:
         connectionSocket.send(headerBytes)
         countad = countad + 1
         sumad = sumad + 1
-        print("here", "here")
+        print("stranger", "here")
         print(countad)
 
         if compsec != int(now.second):
@@ -129,7 +129,7 @@ while True:
             ws.cell(row=sumad, column=3).value = str(sumad)
             ws.cell(row=sumad, column=2).value = str(now)
             ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
-                now.minute) + str(now.second) + str("host") + str(countad)
+                now.minute) + str(now.second) + str("stranger") + str(countad)
             countad = 0
             compsec = now.second
         else:
@@ -137,7 +137,7 @@ while True:
             ws.cell(row=sumad, column=3).value = str(sumad)
             ws.cell(row=sumad, column=2).value = str(now)
             ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
-                now.minute) + str(now.second) + str("host") + str(countad)
+                now.minute) + str(now.second) + str("stranger") + str(countad)
 
         # 엑셀 파일 저장
         wb.save("test.xlsx")
