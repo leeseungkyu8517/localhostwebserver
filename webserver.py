@@ -3,6 +3,33 @@
 from matplotlib import pyplot as plt
 from matplotlib import animation
 import numpy as np
+import openpyxl
+import datetime
+
+wb = openpyxl.load_workbook('test.xlsx')
+
+# 현재 Active Sheet 얻기
+ws = wb.active
+# ws = wb.get_sheet_by_name("Sheet1")
+
+for r in ws.rows:
+    row_index = r[0].row  # 행 인덱스
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -32,8 +59,11 @@ line, = ax.plot(np.arange(max_points),
 countnum = countnum + countad
 
 
+
 while True:
     connectionSocket, address = serverSocket.accept()
+    now = datetime.datetime.now()
+
     try:
         message = connectionSocket.recv(1024)   # buf size 1024
         print("Message : " + str(message))
@@ -43,6 +73,7 @@ while True:
         filename = message.split()[1]
         f = open(filename[1:], "rb")
         outputData = f.read()
+
         # 200 OK
         header = "HTTP/1.1 200 OK\r\n\r\n"
         headerBytes = bytes(header, "UTF-8")
@@ -52,7 +83,16 @@ while True:
             connectionSocket.send(outputData[i:i + 8192])
         connectionSocket.send(b"\r\n\r\n")
         countad = countad + 1
+        print("here", "here")
         print(countad)
+
+        ws.cell(row=countad, column=3).value = str(message)
+        ws.cell(row=countad, column=2).value = str(now)
+        ws.cell(row=countad, column=1).value = str(countad)
+        # 엑셀 파일 저장
+        wb.save("test.xlsx")
+        wb.close()
+
 
         connectionSocket.close()
 
@@ -62,27 +102,21 @@ while True:
         headerBytes = bytes(header, "UTF-8")
         connectionSocket.send(headerBytes)
         countad=countad+1
-        print(countad)
+        #message = connectionSocket.recv(1024)
 
+        ws.cell(row=countad, column=3).value = str(message)
+        ws.cell(row=countad, column=2).value = str(now)
+        ws.cell(row=countad, column=1).value = str(countad)
 
-        def init():
-            return line
+        # 엑셀 파일 저장
+        wb.save("test.xlsx")
+        wb.close()
 
-
-        def animate(i):
-            y = countnum
-            old_y = line.get_ydata()
-            new_y = np.r_[old_y[1:], y]
-            line.set_ydata(new_y)
-            print(new_y)
-            return line
-
-
-        anim = animation.FuncAnimation(fig, animate, init_func=init, frames=200, interval=50, blit=False)
-
-        plt.show()
 
         connectionSocket.close()
+
+
+
 
 
 
