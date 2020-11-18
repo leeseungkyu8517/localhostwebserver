@@ -94,14 +94,21 @@ while True:
 
         if compsec != int(now.second):
 
-            ws.cell(row=sumad, column=4).value = str(message)
+            ws.cell(row=sumad, column=5).value = str(message)
+
+            print(str(now.second))
             ws.cell(row=sumad, column=3).value = str(sumad)
             ws.cell(row=sumad, column=2).value = str(now)
-            ws.cell(row=sumad, column=1).value = str(now.year)+str(now.month)+str(now.day)+str(now.hour)+str(now.minute)+str(now.second)+str("host")+str(countad)
+
             countad=0
+            ws.cell(row=sumad, column=4).value = str(countad+1)
+            ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
+                now.minute) + str(now.second) + str("host") + str(countad)
             compsec = now.second
         else :
-            ws.cell(row=sumad, column=4).value = str(message)
+            ws.cell(row=sumad, column=5).value = str(message)
+            ws.cell(row=sumad, column=4).value = str(countad+1)
+            print(str(now.second))
             ws.cell(row=sumad, column=3).value = str(sumad)
             ws.cell(row=sumad, column=2).value = str(now)
             ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(now.minute) + str(now.second) + str("host") + str(countad)
@@ -125,15 +132,21 @@ while True:
 
         if compsec != int(now.second):
 
-            ws.cell(row=sumad, column=4).value = str(message)
+            ws.cell(row=sumad, column=5).value = str(message)
+
+            print(str(now.second))
             ws.cell(row=sumad, column=3).value = str(sumad)
             ws.cell(row=sumad, column=2).value = str(now)
+
+            countad = 0
+            ws.cell(row=sumad, column=4).value = str(countad+1)
             ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
                 now.minute) + str(now.second) + str("stranger") + str(countad)
-            countad = 0
             compsec = now.second
         else:
-            ws.cell(row=sumad, column=4).value = str(message)
+            ws.cell(row=sumad, column=5).value = str(message)
+            ws.cell(row=sumad, column=4).value = str(countad+1)
+            print(str(now.second))
             ws.cell(row=sumad, column=3).value = str(sumad)
             ws.cell(row=sumad, column=2).value = str(now)
             ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
