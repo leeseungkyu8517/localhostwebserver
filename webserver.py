@@ -5,6 +5,7 @@ from matplotlib import animation
 import numpy as np
 import openpyxl
 import datetime
+from datetime import time
 
 wb = openpyxl.load_workbook('test.xlsx')
 
@@ -47,7 +48,9 @@ serverSocket.listen(1000)   # 1000 = number of unexpected connection
 print("Ready to server")
 
 countad=0
-countnum=0
+sumad=0
+compsec = 61
+
 fig = plt.figure()  # figure(도표) 생성
 
 ax = plt.subplot(211, xlim=(0, 50), ylim=(0, 1024))
@@ -56,7 +59,7 @@ max_points = 50
 
 line, = ax.plot(np.arange(max_points),
                 np.ones(max_points, dtype=np.float) * np.nan, lw=1, c='blue', ms=1)
-countnum = countnum + countad
+
 
 
 
@@ -83,12 +86,26 @@ while True:
             connectionSocket.send(outputData[i:i + 8192])
         connectionSocket.send(b"\r\n\r\n")
         countad = countad + 1
+        sumad=sumad+1
         print("here", "here")
         print(countad)
 
-        ws.cell(row=countad, column=3).value = str(message)
-        ws.cell(row=countad, column=2).value = str(now)
-        ws.cell(row=countad, column=1).value = str(countad)
+
+
+        if compsec != int(now.second):
+
+            ws.cell(row=sumad, column=4).value = str(message)
+            ws.cell(row=sumad, column=3).value = str(sumad)
+            ws.cell(row=sumad, column=2).value = str(now)
+            ws.cell(row=sumad, column=1).value = str(now.year)+str(now.month)+str(now.day)+str(now.hour)+str(now.minute)+str(now.second)+str("host")+str(countad)
+            countad=0
+            compsec = now.second
+        else :
+            ws.cell(row=sumad, column=4).value = str(message)
+            ws.cell(row=sumad, column=3).value = str(sumad)
+            ws.cell(row=sumad, column=2).value = str(now)
+            ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(now.minute) + str(now.second) + str("host") + str(countad)
+
         # 엑셀 파일 저장
         wb.save("test.xlsx")
         wb.close()
@@ -101,12 +118,14 @@ while True:
         header = "HTTP/1.1 404 Not found\r\n"
         headerBytes = bytes(header, "UTF-8")
         connectionSocket.send(headerBytes)
+        sumad = sumad + 1
         countad=countad+1
         #message = connectionSocket.recv(1024)
 
-        ws.cell(row=countad, column=3).value = str(message)
+        ws.cell(row=countad, column=4).value = str(message)
+        ws.cell(row=countad, column=3).value = str(sumad)
         ws.cell(row=countad, column=2).value = str(now)
-        ws.cell(row=countad, column=1).value = str(countad)
+        ws.cell(row=countad, column=1).value = str(now.year)+str(now.month)+str(now.day)+str(now.hour)+str(now.minute)+str(now.second)+str("stranger")+str(countad)
 
         # 엑셀 파일 저장
         wb.save("test.xlsx")
