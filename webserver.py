@@ -86,25 +86,27 @@ while True:
 
 
         if compsec != int(now.second):
-
-            ws.cell(row=sumad, column=5).value = str(message)
-
-            print(str(now.second))
-            ws.cell(row=sumad, column=3).value = str(sumad)
-            ws.cell(row=sumad, column=2).value = str(now)
+            ws.cell(row=sumad, column=7).value = str("header")
+            ws.cell(row=sumad+1, column=5).value = str(now.month) + str(now.day) + str(now.hour) + str(
+                now.minute) + str(now.second)+str("." )+ str(now.microsecond)
+            ws.cell(row=sumad+1, column=6).value = str(message)
+            ws.cell(row=sumad+1, column=3).value = str(sumad)
+            ws.cell(row=sumad+1, column=2).value = str(now)
 
             countad=0
-            ws.cell(row=sumad, column=4).value = str(countad+1)
-            ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
+            ws.cell(row=sumad+1, column=4).value = str(countad+1)
+            ws.cell(row=sumad+1, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
                 now.minute) + str(now.second) + str("host") + str(countad)
             compsec = now.second
         else :
-            ws.cell(row=sumad, column=5).value = str(message)
-            ws.cell(row=sumad, column=4).value = str(countad+1)
-            print(str(now.second))
-            ws.cell(row=sumad, column=3).value = str(sumad)
-            ws.cell(row=sumad, column=2).value = str(now)
-            ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(now.minute) + str(now.second) + str("host") + str(countad)
+            ws.cell(row=sumad, column=7).value = str("header")
+            ws.cell(row=sumad+1, column=5).value = str(now.month) + str(now.day) + str(now.hour) + str(
+                now.minute) + str(now.second)+ str("." )+str(now.microsecond)
+            ws.cell(row=sumad+1, column=6).value = str(message)
+            ws.cell(row=sumad+1, column=4).value = str(countad+1)
+            ws.cell(row=sumad+1, column=3).value = str(sumad)
+            ws.cell(row=sumad+1, column=2).value = str(now)
+            ws.cell(row=sumad+1, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(now.minute) + str(now.second) + str("host") + str(countad)
 
         # 엑셀 파일 저장
         wb.save("test.xlsx")
@@ -127,25 +129,30 @@ while True:
         print(countad)
 
         if compsec != int(now.second):
-
-            ws.cell(row=sumad, column=5).value = str(message)
+            ws.cell(row=sumad, column=7).value = str("header")
+            ws.cell(row=sumad+1, column=5).value = str(now.month) + str(now.day) + str(now.hour) + str(
+                now.minute) + str(now.second) +str("." )+ str(now.microsecond)
+            ws.cell(row=sumad+1, column=6).value = str(message)
 
             print(str(now.second))
-            ws.cell(row=sumad, column=3).value = str(sumad)
-            ws.cell(row=sumad, column=2).value = str(now)
+            ws.cell(row=sumad+1, column=3).value = str(sumad)
+            ws.cell(row=sumad+1, column=2).value = str(now)
 
             countad = 0
-            ws.cell(row=sumad, column=4).value = str(countad+1)
-            ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
+            ws.cell(row=sumad+1, column=4).value = str(countad+1)
+            ws.cell(row=sumad+1, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
                 now.minute) + str(now.second) + str("stranger") + str(countad)
             compsec = now.second
         else:
-            ws.cell(row=sumad, column=5).value = str(message)
-            ws.cell(row=sumad, column=4).value = str(countad+1)
+            ws.cell(row=sumad, column=7).value = str("header")
+            ws.cell(row=sumad+1, column=5).value = str(now.month) + str(now.day) + str(now.hour) + str(
+                now.minute) + str(now.second)+str("." )+ str(now.microsecond)
+            ws.cell(row=sumad+1, column=6).value = str(message)
+            ws.cell(row=sumad+1, column=4).value = str(countad+1)
             print(str(now.second))
-            ws.cell(row=sumad, column=3).value = str(sumad)
-            ws.cell(row=sumad, column=2).value = str(now)
-            ws.cell(row=sumad, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
+            ws.cell(row=sumad+1, column=3).value = str(sumad)
+            ws.cell(row=sumad+1, column=2).value = str(now)
+            ws.cell(row=sumad+1, column=1).value = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(
                 now.minute) + str(now.second) + str("stranger") + str(countad)
 
         # 엑셀 파일 저장
